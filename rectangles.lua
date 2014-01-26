@@ -41,7 +41,7 @@ end
 function drawRectangles()
   for i,v in ipairs(rectangles) do lg.rectangle('fill', v.x,v.y,width,height) end
 end
-local printConst = 1 -- manipulate printConst to print text in str table
+local printConst = 3 -- manipulate printConst to print text in str table
 function clickOnRectangle_mousepressed(x,y,button) 
   if button == 'l' then 
     for i,v in ipairs(rectangles) do
