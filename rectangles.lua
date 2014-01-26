@@ -52,7 +52,7 @@ function clickOnRectangle_mousepressed(x,y,button)
         y <= v.y+height 
         then
         score = score + 1
-        for i=2,#str do
+        for i=1,#str do
           if score == printConst*i then printStr() end 
         end
       end
@@ -60,7 +60,7 @@ function clickOnRectangle_mousepressed(x,y,button)
   end
 end
 function printStr()
- for i=2,#str do
+ for i=1,#str do
     if score == printConst*i then lg.print(str[i],50,50) end
  end
 end
