@@ -51,6 +51,8 @@ function clickOnRectangle_mousepressed(x,y,button)
         y >= v.y and
         y <= v.y+height 
         then
+        -- rm rectangles when clicked, inc score and print string
+        table.remove(rectangles,i) 
         score = score + 1
         for i=1,#str do
           if score == printConst*i then printStr() end 
