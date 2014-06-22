@@ -3,8 +3,14 @@
 local rectangles,lg = {},love.graphics
 
 local timer, timerSpeed, timerStart = 20,1,{}
-local vx,vy,width,height,maxRectangles = 0,250,32,32,5
-for i=1,maxRectangles do timerStart[#timerStart+1] = 0 end -- 5 circles 5 starting points..
+local vx,vy,width,height = 0,250,32,32
+local tStart = { }
+local t,max = "t",2
+for i=1,2 do
+   tStart[#tStart+1] = t .. tostring(i)
+end
+for i=1,#tStart do tStart[i] = 0 end -- set all timers for the rectangles to 0
+
 local score = 0
 
 local str, strTimer, strTimerStart = {
@@ -20,14 +26,15 @@ local str, strTimer, strTimerStart = {
 function rectangles_setPos(x,y)
   table.insert(rectangles, { x=x, y=y }) 
 end
+local const_t1, const_t2 = 5,8
 function genRectangles(dt)
-  for i=1,maxRectangles do 
-    timerStart[i] = timerStart[i] + timerSpeed*dt
-    -- gen them at "random" time
-    if timerStart[i] >= timer/i then
-      rectangles_setPos(math.random(0,lg.getWidth()-width), 0)
-      timerStart[i] = 0
-    end
+  tStart[1], tStart[2] = tStart[1] + timerSpeed*dt, tStart[2] + timerSpeed*dt
+  if tStart[1] >= timer/const_t1 then 
+    rectangles_setPos(math.random(0,lg.getWidth()-width),0)
+    tStart[1] = 0
+  elseif tStart[2] >= timer/const_t2 then 
+      rectangles_setPos(math.random(0,lg.getWidth()-width),0)
+      tStart[2] = 0
   end
 end
 function moveRectangles(dt)
@@ -70,6 +77,8 @@ function printScore() lg.print("SCORE " .. score, 10, lg.getHeight()-17.5) end
 function stringTimer(dt)
   strTimerStart = strTimerStart + dt
 end
+
+local floor = math.floor
 function printTimePlay()
-  lg.print("You just wasted " .. math.floor(strTimerStart) .. " seconds of your life", 12, 12.5) 
+  lg.print("You just wasted " .. floor(strTimerStart) .. " seconds of your life", 12, 12.5) 
 end
