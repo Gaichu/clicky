@@ -1,4 +1,4 @@
--- circles.lua
+-- rectangles.lua
 
 local rectangles,lg = {},love.graphics
 
